@@ -1,18 +1,17 @@
-// import { Home as HomeIcon } from '@mui/icons-material'
-
-import Home from '@@/pages/Home'
+import List from '@@/pages/list/index.tsx'
+import Detail from '@@/pages/detail/index.tsx'
 import { createBrowserRouter } from 'react-router-dom'
 // import { Route } from '../types/Route'
 
 const routes = createBrowserRouter([
   {
     path: '/',
-    element: Home(),
+    element: <List/>,
     children: [
-      // {
-      //   path: 'team',
-      //   element: <Team />,
-      // },
+      {
+        path: 'detail/:id',
+        element: <Detail/>,
+      },
     ],
   },
 ])
