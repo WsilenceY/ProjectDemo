@@ -1,11 +1,14 @@
 import React from 'react';
-import {Box} from '@mui/material';
+import styles from './index.module.scss'
+import {Box, Button} from '@mui/material';
  const DetailItem = (props:any) => {
-  console.log('----list-- props--', props)
   return (
-    <React.Fragment>
-      <Box>ddddd</Box>
-    </React.Fragment>
+    <div className={styles.detail_page_wap}>
+      <h1>
+        <Button variant="contained">返回</Button>
+        详情页
+      </h1>
+    </div>
   );
 }
 export default DetailItem;

@@ -1,52 +1,74 @@
-import * as React from 'react';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
+import React,{useRef,useEffect} from 'react';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
-import InfoIcon from '@mui/icons-material/Info';
 import Icon from '@mui/material/Icon';
 import Grid from '@mui/material/Grid';
+import LoadingButton from '@mui/lab/LoadingButton';
 import styles from './index.module.scss'
 import Filter from './Filter'
+import LaunchItem from './LaunchItem';
+import { Outlet } from 'react-router-dom'
 export default function TitlebarImageList() {
+  const listref:any = useRef(null)
+  const [loading, setLoading] = React.useState(false);
+  const [query, setQuery] = React.useState('idle');
+  const [items, setItems] = React.useState(itemData);
+  const toTop = () => {
+    if(!listref.current){return}
+    console.log('ssss',listref.current)
+    listref.current.scrollTo({
+      top:0,
+      behavior:'smooth'
+    })
+  }
+  function handleScroll(){
+    console.log('添加数据');
+    setItems([...items,...itemData])
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000);
+  }
+  useEffect(()=>{
+    //判断滚动到底部
+    if(!listref.current){return}
+    listref.current.addEventListener('scroll',function(e:any){
+      if(e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight-5){
+        console.log('滚动到底部了');
+        setLoading(true)
+        handleScroll()
+      }
+    })
+    return ()=>{
+      listref.current.removeEventListener('scroll',handleScroll)
+    }
+  },[items])
   return (
+    <>
+    <Outlet/>
     <div className={styles.list_page_wrap}>
-    <Filter/>
-    <Grid container spacing={2} height={'100%'} width={1000} overflow={'scroll'}>
-      {itemData.map((item) => (
-        <Grid item xs={12} md={6}>
-          <ImageListItem key={item.img}>
-            <img
-              src={`${item.img}?w=248&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <ImageListItemBar
-              title={item.title}
-              subtitle={item.author}
-              actionIcon={
-                <IconButton
-                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                  aria-label={`info about ${item.title}`}
-                >
-                <InfoIcon />
-              </IconButton>
-            }
-          />
-        </ImageListItem>
+      <Filter/>
+      <div id='ttt' className={styles.list_con} ref={listref}>
+        <Grid container spacing={2}  width={1000}>
+          {items.map((item,index) => (
+            <Grid item xs={12} md={6} key={`img${index}`}>
+              <LaunchItem item={item}/>
+            </Grid>
+          ))}
         </Grid>
-      ))}
-    </Grid>
-    <div className={styles.top_btn_con}>
-           <Link component={Button}>
-                 <Icon>local_airport</Icon>
-           </Link>
+        <div className={styles.top_btn_con} onClick={toTop}>
+            <Link component={Button}>
+                  <Icon>local_airport</Icon>
+            </Link>
         </div>
+        {
+          loading &&
+          <div className={styles.loadingbtn}>
+            <LoadingButton  loading variant="outlined"></LoadingButton>
+          </div>
+        }
+      </div>
     </div>
+    </>
   );
 }
 
