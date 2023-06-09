@@ -17,12 +17,13 @@ export const Layout: FC<LayoutProps> = (props) => {
       css={css`
         min-height: 100vh;
         width:100%;
+        overflow-x: hidden;
       `}
     >
       <div
         css={css`
           display: flex;
-          min-height: calc(100vh - ${FOOTER_HEIGHT}px);
+          height: calc(100vh - ${FOOTER_HEIGHT}px);
         `}
       >
         <Box component='main' sx={{ flexGrow: 1, p: 3, pt: 0 }}>

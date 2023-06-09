@@ -1,37 +1,40 @@
-import React from 'react';
-import {Container,CssBaseline,Box,Grid,Paper,styled  } from '@mui/material';
+/*
+ * @Author: wangying wangying@waytous.com
+ * @Date: 2023-06-09 09:54:59
+ * @LastEditors: wangying wangying@waytous.com
+ * @LastEditTime: 2023-06-09 11:18:53
+ * @FilePath: /ProjectDemo/src/pages/list/index.tsx
+ * @Description: 列表页
+ */
+import React,{useState} from 'react';
+import {Container,CssBaseline,Box,Grid,Paper,styled, Link,Button  } from '@mui/material';
 import Filter from './Filter'
 import LaunchItem from './LaunchItem'
 import { Outlet } from "react-router-dom";
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
- const ListCon= (props:any) => {
-  console.log('----list-- props--', props)
+import styles from './index.module.scss'
+ const ListCon= () => {
+  const [itemnum, setItemNm]=useState(12)
   return (
     <React.Fragment>
       <CssBaseline />
       <Filter></Filter>
-      <Container component={Grid} maxWidth="md">
-        <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} >
-          <Item>
-            <LaunchItem></LaunchItem>
-          </Item>
-          <Item>
-            <LaunchItem></LaunchItem>
-          </Item>
-          <Item>
-            <LaunchItem></LaunchItem>
-          </Item>
-          <Item>
-            <LaunchItem></LaunchItem> 
-          </Item>
-        </Box>
-      </Container>
+      <div className={styles.list_con}>
+        <Grid container spacing={2} height={'100%'} overflow={'scroll'}>
+          {
+            new Array(itemnum).fill(1).map((item,index)=>{
+              return (
+                <Grid xs={12} xl={6} item minHeight={200}>
+                   <LaunchItem></LaunchItem>
+                </Grid>
+              )
+            })
+          }
+          <Grid xs={12} xl={12} item>
+            <Link component={Button}>回到顶部</Link>
+          </Grid>
+        </Grid>
+      </div>
+
       <Outlet />
     </React.Fragment>
   );
