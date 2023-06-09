@@ -15,24 +15,12 @@ export const Layout: FC<LayoutProps> = (props) => {
   return (
     <div
       css={css`
-        min-height: 100vh;
         width:100%;
-        overflow-x: hidden;
+        height: 100%;
+        overflow: hidden;
       `}
     >
-      <div
-        css={css`
-          display: flex;
-          height: calc(100vh - ${FOOTER_HEIGHT}px);
-        `}
-      >
-        <Box component='main' sx={{ flexGrow: 1, p: 3, pt: 0 }}>
-          {children}
-        </Box>
-      </div>
-      <Box component='footer'>
-        <Footer />
-      </Box>
+        {children}
     </div>
   )
 }

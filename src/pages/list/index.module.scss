@@ -1,4 +1,21 @@
 .list_con{
   height: calc(100% - 120px);
   overflow: auto;
+  margin: auto;
+  left: 0;
+  right: 0;
+  position: absolute;
+  width: 1000px;
+}
+.top_btn_con{
+  width: 50px;
+  height: 50px;
+  position: sticky;
+  left: 90%;
+  bottom: 30px;
+}
+.list_page_wrap{
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
