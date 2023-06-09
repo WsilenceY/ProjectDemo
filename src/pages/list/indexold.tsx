@@ -4,47 +4,48 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
-// import Link from '@mui/material/Link';
-// import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
 import InfoIcon from '@mui/icons-material/Info';
+import Icon from '@mui/material/Icon';
+import Grid from '@mui/material/Grid';
 import styles from './index.module.scss'
 import Filter from './Filter'
 export default function TitlebarImageList() {
   return (
     <div className={styles.list_page_wrap}>
-      <Filter/>
-    <ImageList sx={{ width: 1000, height: 800 }}>
-      <ImageListItem key="Subheader" cols={2}>
-        <ListSubheader component="div">December</ListSubheader>
-      </ImageListItem>
+    <Filter/>
+    <Grid container spacing={2} height={'100%'} width={1000} overflow={'scroll'}>
       {itemData.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            src={`${item.img}?w=248&fit=crop&auto=format`}
-            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            alt={item.title}
-            loading="lazy"
-          />
-          <ImageListItemBar
-            title={item.title}
-            subtitle={item.author}
-            actionIcon={
-              <IconButton
-                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                aria-label={`info about ${item.title}`}
-              >
+        <Grid item xs={12} md={6}>
+          <ImageListItem key={item.img}>
+            <img
+              src={`${item.img}?w=248&fit=crop&auto=format`}
+              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              loading="lazy"
+            />
+            <ImageListItemBar
+              title={item.title}
+              subtitle={item.author}
+              actionIcon={
+                <IconButton
+                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                  aria-label={`info about ${item.title}`}
+                >
                 <InfoIcon />
               </IconButton>
             }
           />
         </ImageListItem>
+        </Grid>
       ))}
-    </ImageList>
-    {/* <div className={styles.top_btn_con}>
+    </Grid>
+    <div className={styles.top_btn_con}>
            <Link component={Button}>
                  <Icon>local_airport</Icon>
            </Link>
-        </div> */}
+        </div>
     </div>
   );
 }
