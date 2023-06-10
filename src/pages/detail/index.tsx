@@ -1,16 +1,16 @@
 import React from 'react';
 import styles from './index.module.scss'
-import {Box, Button} from '@mui/material';
+import { Button } from '@mui/material';
  const DetailItem = () => {
   return (
     <div className={styles.detail_page_wap}>
       <h1>
         <Button variant="contained" href='javascript:history.go(-1)'>Back to LAUNCHES</Button>
       </h1>
-      <Box sx={{ width: '100%' }} height={800} width={1000} >
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }} width={1000} overflow={'hidden'} marginLeft={'calc(50% - 500px)'}>
+      <div className={styles.detail_con}>
+        <div className={styles.video_con}>
           <video
-            width={1000}
+            width={'100%'}
             loop
             muted
             controls
@@ -21,13 +21,13 @@ import {Box, Button} from '@mui/material';
               type="video/mp4"
             />
           </video>
-        </Box>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }} color={'red'}>
+        </div>
+        <div className={styles.info_con}>
           <p>APPIL 1,9,2023 </p>
           <h2>title</h2>
           <p>content content content contentcontentcontentcontentcontentcontentcontent</p>
-        </Box>
-      </Box>
+        </div>
+      </div>
     </div>
   );
 }

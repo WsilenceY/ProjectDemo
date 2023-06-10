@@ -55,7 +55,7 @@ export default function TitlebarImageList() {
       <Filter onSearch={handleFilter}/>
       {/* 列表容器 */}
       <div className={styles.list_con} ref={listref}>
-        <Grid container spacing={2}  width={1000}>
+        <Grid container spacing={2}>
           {items.map((item,index) => (
             <Grid item xs={12} md={6} key={`img${index}`}>
               {/* 内容item */}

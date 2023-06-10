@@ -7,3 +7,18 @@
   z-index: 1000;
   color: aqua;
 }
+@media screen and (min-width: 768px) {
+  .detail_page_wap{
+    .video_con{
+      width: 1000px;
+      margin-left: calc(50% - 500px);
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .detail_page_wap{
+    video{
+      width: 100%;
+    }
+  }
+}
